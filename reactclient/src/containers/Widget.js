@@ -2,7 +2,7 @@ import React from 'react';
 import Cpu from './Cpu';
 import Info from './Info';
 import Memory from './Mem';
-
+import './widgets.css';
 
 const Widget = props => {
     const { 
@@ -15,7 +15,8 @@ const Widget = props => {
         upTime,
         cpuSpeed,
         cpuLoad,
-        cpuModel 
+        cpuModel,
+        macAddress 
     } = props.data
 
     const cpu = {cpuLoad}
@@ -23,7 +24,7 @@ const Widget = props => {
     const info = {macAddress, osType, upTime, cpuModel, numCores, cpuSpeed}
 
     return (
-        <div>
+        <div className="widget col-sm-12">
             <h1>Widget</h1>
             <Cpu cpuData={cpu} />
             <Memory memData={mem} />
