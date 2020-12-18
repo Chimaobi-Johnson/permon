@@ -13,7 +13,11 @@ socket.on("connect", () => {
     for(let key in nI) {
         //check if internal is false
         if(!nI[key][0].internal) {
-            macAddress = nI[key][0].mac;
+            if(nI[key][0].mac === "00:00:00:00:00:00") {
+                macAddress = Math.floor().toString(36).substr(2, 15);
+            } else {
+                macAddress = nI[key][0].mac;
+            }
             break;
         }
     }
@@ -29,6 +33,7 @@ socket.on("connect", () => {
     let perfDataInterval = setInterval(() => {
         performanceData().then(allPerformanceData => {
             // console.log(allData)
+            allPerformanceData.macAddress = macAddress;
             socket.emit("perfData", allPerformanceData)
         })
     }, 1000);
